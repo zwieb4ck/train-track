@@ -1,0 +1,68 @@
+<div class="v-dash">
+    <header class="v-dash__header">
+        <span class="v-dash__add-button v-dash__add-button--hidden"></span>
+        <span class="v-dash__header-title">Dashboard</span>
+        <button class="v-dash__add-button" (click)="addSplit()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="post_add"></mat-icon>
+        </button>
+    </header>
+    <div class="v-dash__content">
+        <div class="v-dash__card">
+            <header class="v-dash__card-header">
+                <h2 class="v-dash__card-title">Previous Trainings</h2>
+                <button class="v-dash__add-button v-dash__add-button--dark" (click)="toggleDatePicker()"
+                    *ngIf="!datePickerCollapsed">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon"
+                        fontIcon="keyboard_arrow_up"></mat-icon>
+                </button>
+                <button class="v-dash__add-button v-dash__add-button--dark" (click)="toggleDatePicker()"
+                    *ngIf="datePickerCollapsed">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon"
+                        fontIcon="keyboard_arrow_down"></mat-icon>
+                </button>
+            </header>
+            <mat-calendar [dateClass]="dateClass" *ngIf="!datePickerCollapsed"></mat-calendar>
+        </div>
+        <div class="v-dash__card">
+            <h2 class="v-dash__card-title" style="margin-bottom: 12px;">Splits</h2>
+            <ul class="v-dash__list">
+                <li class="v-dash__sub-card" *ngFor="let split of splits" [style.borderColor]="split.color">
+                    <header>
+                        <button class="v-dash__add-button v-dash__add-button--darker" (click)="deleteSplit(split)">
+                            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
+                        </button>
+                        <button class="v-dash__add-button v-dash__add-button--darker" (click)="editSplit(split)"
+                            (click)="edit(split)">
+                            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit"></mat-icon>
+                        </button>
+
+                    </header>
+                    <div>
+                        <span>
+                            {{split.name}}
+                        </span>
+
+                        <button class="v-dash__add-button v-dash__add-button--darker" (click)="Goto(split)">
+                            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="forward"></mat-icon>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="c-dialog" [ngClass]="{'c-dialog--visible': deleteSplitItem !== null}">
+    <div class="c-dialog__content">
+      <mat-icon class="c-dialog__content-icon" fontIcon="warning"></mat-icon>
+      <p>
+        Are you sure you want to delete this split?
+      </p>
+      <p>
+        {{ deleteSplitItem?.name }}
+      </p>
+      <div class="c-dialog__content-actions">
+        <button class="c-dialog__button" (click)="deleteSplit(null)">Cancel</button>
+        <button class="c-dialog__button c-dialog__button--cta" (click)="removeSplit()">Delete</button>
+      </div>
+    </div>
+  </div>

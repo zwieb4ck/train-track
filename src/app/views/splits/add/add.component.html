@@ -1,0 +1,125 @@
+<div class="v-add-split">
+    <header class="v-add-split__header">
+        <button class="v-add-split__button" (click)="back()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
+        <span class="v-add-split__header-title">Add Split</span>
+        <button class="v-add-split__button" (click)="addForm()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+        </button>
+    </header>
+
+    <div class="v-add-split__content">
+
+        <div class="v-add-split__card">
+            <header class="v-add-split__card-header">
+                <span>
+                    <span *ngIf="split.collapsed">
+                        <span class="color-circle" [style.background-color]="split.color"></span> {{ split.name.length > 0 ? split.name : "Exercise not named yet"
+                        }}</span>
+                </span>
+                <button class="v-add-split__add-button v-add-split__add-button--dark" (click)="toggleExercise(split)"
+                    *ngIf="!split.collapsed">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon"
+                        fontIcon="keyboard_arrow_up"></mat-icon>
+                </button>
+                <button class="v-add-split__add-button v-add-split__add-button--dark" (click)="toggleExercise(split)"
+                    *ngIf="split.collapsed">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon"
+                        fontIcon="keyboard_arrow_down"></mat-icon>
+                </button>
+            </header>
+            <form class="v-add-split-form" *ngIf="!split.collapsed">
+                <div class="v-add-split-form__item">
+                    <mat-form-field class="full-width">
+                        <mat-label>Name of split</mat-label>
+                        <input matInput id="name" required [(ngModel)]="split.name" name="name">
+                    </mat-form-field>
+                </div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Color</mat-label>
+                    <mat-select id="color" required [(ngModel)]="split.color" name="color">
+                        <mat-option *ngFor="let color of colors" [value]="color.value">
+                            <span class="color-circle" [style.background-color]="color.value"></span>
+                            {{ color.label }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </div>
+        <div *ngIf="exercises.length === 0" class="v-add-split__content-empty">
+            No exercises added yet
+        </div>
+
+        <div class="v-add-split__card" *ngFor="let exercise of exercises; let i = index">
+            <header class="v-add-split__card-header">
+                <span>
+                    <span *ngIf="exercise.collapsed">
+                     {{ exercise.name.length > 0 ? exercise.name : "Exercise not named yet" }}
+                    </span>
+                </span>
+                <button class="v-add-split__add-button v-add-split__add-button--dark" (click)="toggleExercise(exercise)"
+                    *ngIf="!exercise.collapsed">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon"
+                        fontIcon="keyboard_arrow_up"></mat-icon>
+                </button>
+                <button class="v-add-split__add-button v-add-split__add-button--dark" (click)="toggleExercise(exercise)"
+                    *ngIf="exercise.collapsed">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon"
+                        fontIcon="keyboard_arrow_down"></mat-icon>
+                </button>
+            </header>
+            <form class="v-add-split-form" *ngIf="!exercise.collapsed">
+                <div class="v-add-split-form__item">
+                    <mat-form-field class="full-width">
+                        <mat-label>Name of exercise</mat-label>
+                        <input matInput id="name" required [(ngModel)]="exercise.name" name="name">
+                    </mat-form-field>
+                </div>
+                <div class="v-add-split-form__item">
+                    <mat-form-field class="full-width">
+                        <mat-label>Device</mat-label>
+                        <input matInput id="device" required [(ngModel)]="exercise.device" name="device">
+                    </mat-form-field>
+                </div>
+
+                <div class="v-add-split-form__item">
+                    <div class="v-add-split-sets">
+                        <label>Sets</label>
+                        <span>
+                            <button class="v-add-split__add-button" (click)="addSet(exercise)">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="add"></mat-icon>
+                            </button>
+                        </span>
+                    </div>
+                    <ul *ngFor="let set of exercise.sets" class="v-add-split-set-list">
+                        <li class="v-add-split-set-list__item">
+                            <mat-form-field class="v-add-split-set-list__input">
+                                <mat-label>Reps</mat-label>
+                                <input matInput id="reps" required [(ngModel)]="set.reps" name="reps">
+                            </mat-form-field>
+                            <mat-form-field class="v-add-split-set-list__input">
+                                <mat-label>Weight</mat-label>
+                                <input matInput id="weight" required [(ngModel)]="set.weight" name="weight">
+                            </mat-form-field>
+                            <button class="v-add-split__add-button v-add-split-set-list__icon"
+                                (click)="removeSetFromExercise(set, exercise)">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                    fontIcon="remove"></mat-icon>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="v-add-split-form__item">
+                    <mat-form-field class="v-add-split-set-list__input">
+                        <mat-label>Notes:</mat-label>
+                        <textarea name="notes" matInput [(ngModel)]="exercise.notes"></textarea>
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="v-add-split__footer">
+        <button (click)="saveForms()" class="v-add-split__save-button">Speichern</button>
+    </footer>
+</div>

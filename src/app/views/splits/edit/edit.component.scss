@@ -1,0 +1,232 @@
+:host {
+    flex: 1 1 100%;
+    width: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+  
+    --mat-datepicker-calendar-period-button-text-color: var(--primary);
+    --mat-datepicker-calendar-period-button-icon-color: var(--primary);
+    --mat-datepicker-calendar-date-text-color: var(--color);
+    --mat-datepicker-calendar-body-label-text-color: rgba(255, 255, 255, 0.54);
+    --mat-datepicker-calendar-header-text-color: rgba(255, 255, 255, 0.54);
+    --mat-datepicker-calendar-date-today-outline-color: var(--primary);
+    --mat-datepicker-calendar-date-focus-state-background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .v-add-split {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 100vh;
+  
+    &__header {
+      top: 4px;
+      width: calc(100% - 8px);
+      height: 60px;
+      z-index: 10;
+      position: fixed;
+      display: flex;
+      gap: 12px;
+      padding: 4px;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: rgba(255, 255, 255, 0.025);
+      border-radius: 30px;
+  
+      &-title {
+        flex: 1 1 100%;
+        text-align: center;
+      }
+    }
+  
+    &__button {
+      height: 48px;
+      width: 48px;
+      background-color: rgba(255, 255, 255, 0.3);
+      color: var(--primary);
+      border-radius: 50%;
+      outline: none;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      flex: 0 0 48px;
+  
+      &--dark {
+        background-color: var(--background);
+      }
+  
+      &--hidden {
+        visibility: hidden;
+      }
+    }
+  
+    &__add-button,
+    &__remove-button {
+        height: 32px;
+        width: 32px;
+        padding: 0;
+        border: none;
+        background: none;
+        border-radius: 50%;
+        border: 1px solid var(--primary);
+    
+        mat-icon {
+            font-size: 18px; // Passe die Icon-Größe an, je nach Bedarf
+            width: 24px;
+            height: 24px;
+            font-weight: bold;
+            line-height: 24px; // Diese Linie sichert sich, dass das Icon richtig zentriert ist
+            color: var(--primary)
+        }
+    }
+
+    &__content {
+      position: relative;
+      top: 68px;
+      max-height: calc(100vh - 68px);
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      &-empty {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0.54;
+        flex: 1 1 100%;
+        margin-top: 60px;
+        transform: translateY(-50%);
+      }
+    }
+
+    &__footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 60px;
+        width: 100%;
+    }
+
+    &__save-button {
+        height: 60px;
+        width: 100%;
+        background-color: var(--primary);
+        color: var(--background);
+        text-transform: uppercase;
+    }
+  
+    &__card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 30px;
+      padding: 24px;
+  
+      &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+  
+      &-title {
+        margin: 0;
+        padding: 0;
+        font-weight: 100;
+      }
+    }
+  
+    &__sub-card {
+    }
+
+    &-form {
+        margin-top: 12px;
+    }
+  }
+
+  .full-width {
+    width: 100%;
+  }
+  
+  .v-add-split-sets {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .v-add-split-set-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    
+    &__item {
+        gap: 4px;
+        display: flex;
+        width: 100%;
+        align-items: center;
+    }
+
+    &__input {
+        flex: 1 1 auto;
+    }
+
+    &__icon {
+        flex: 0 0 32px;
+    }
+  }
+
+.u-f9ca24 {
+    color: #f9ca24;
+    background-color: #f9ca24;
+}
+.u-f0932b {
+    color: #f0932b;
+    background-color: #f0932b;
+}
+.u-eb4d4b {
+    color: #eb4d4b;
+    background-color: #eb4d4b;
+}
+.u-6ab04c {
+    color: #6ab04c;
+    background-color: #6ab04c;
+}
+.u-22a6b3 {
+    color: #22a6b3;
+    background-color: #22a6b3;
+}
+.u-be2edd {
+    color: #be2edd;
+    background-color: #be2edd;
+}
+.u-4834d4 {
+    color: #4834d4;
+    background-color: #4834d4;
+}
+.u-130f40 {
+    color: #130f40;
+    background-color: #130f40;
+}
+.u-c7ecee {
+    color: #c7ecee;
+    background-color: #c7ecee;
+}
+.u-535c68 {
+    color: #535c68;
+    background-color: #535c68;
+}
+
+.color-circle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }

@@ -1,0 +1,81 @@
+<div class="v-use-split">
+    <header class="v-use-split__header">
+        <span class="v-use-split__button v-use-split__button--hidden"></span>
+        <span class="v-use-split__header-title">{{split ? split.name : ""}}</span>
+        <button class="v-use-split__button" (click)="cancelTraining()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">cancel</mat-icon>
+        </button>
+    </header>
+    <div class="v-use-split__content" *ngIf="exercise !== null && split !== null">
+        <nav class="v-use-split__content-header">
+            <button class="v-use-split__button v-use-split__button--dark" *ngIf="currentIndex > 0"  (click)="goPrev()">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+            <span></span>
+            <button class="v-use-split__button v-use-split__button--dark" (click)="goNext()">
+                <mat-icon>arrow_forward_ios</mat-icon>
+            </button>
+        </nav>
+        <h1>
+            {{exercise.name}}
+        </h1>
+        <h3>Device: {{exercise.device}}</h3>
+        <div class="v-use-split-sets">
+            <label>Sets</label>
+            <span>
+                <button class="v-use-split__add-button" (click)="addSet()">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="add"></mat-icon>
+                </button>
+            </span>
+        </div>
+        <ul *ngFor="let set of exercise.sets" class="v-use-split-set-list">
+            <li class="v-use-split-set-list__item">
+                <mat-form-field class="v-use-split-set-list__input">
+                    <mat-label>Reps</mat-label>
+                    <input (blur)="enableUpdate();" matInput id="reps" required [(ngModel)]="set.reps" name="reps">
+                </mat-form-field>
+                <mat-form-field class="v-use-split-set-list__input">
+                    <mat-label>Weight</mat-label>
+                    <input (blur)="enableUpdate();" matInput id="weight" required [(ngModel)]="set.weight"
+                        name="weight">
+                </mat-form-field>
+                <button class="v-use-split__add-button v-use-split-set-list__icon" (click)="removeSetFromExercise(set)">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="remove"></mat-icon>
+                </button>
+            </li>
+        </ul>
+        <div>
+            <strong>Notes:</strong>
+            <p>{{exercise.notes}}</p>
+        </div>
+    </div>
+    <footer class="v-use-split__footer" *ngIf="hasChanged">
+        <button (click)="save()" class="v-use-split__save-button">Speichern</button>
+    </footer>
+</div>
+
+
+<div class="c-dialog" [ngClass]="{'c-dialog--visible': aborting}">
+    <div class="c-dialog__content">
+        <mat-icon class="c-dialog__content-icon" fontIcon="warning"></mat-icon>
+        <p>
+            Do you really want to stop the training?
+        </p>
+        <div class="c-dialog__content-actions">
+            <button class="c-dialog__button" (click)="cancel()">No</button>
+            <button class="c-dialog__button c-dialog__button--cta" (click)="stopTraining()">Yes</button>
+        </div>
+    </div>
+</div>
+
+<div class="c-dialog" [ngClass]="{'c-dialog--visible': isDone}">
+    <div class="c-dialog__content">
+        <mat-icon class="c-dialog__content-icon" fontIcon="check_circle"></mat-icon>
+        <p>
+            You completed your split. Perfect!
+        </p>
+        <div class="c-dialog__content-actions">
+            <button class="c-dialog__button c-dialog__button--cta" (click)="finishTraining()">Back to Dashboard</button>
+        </div>
+    </div>
+</div>
